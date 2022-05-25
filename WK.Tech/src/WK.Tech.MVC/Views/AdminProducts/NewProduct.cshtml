@@ -1,0 +1,86 @@
+﻿@model  WK.Tech.Domain.Dtos.ProductDto
+
+@{
+    ViewData["Title"] = "NovoProduto";
+}
+
+<h1>Novo Produto</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="NewProduct">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Nome</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label class="control-label">Descrição</label>
+                        <input asp-for="Description" class="form-control" />
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>                   
+                </div>               
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Categoria</label>
+                        <select asp-for="CategoryId" class="form-control" asp-items="@(new SelectList(Model.Categories, "Id", "Name"))">
+                            <option></option>
+                        </select>
+
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    </div>
+                </div>
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Valor</label>
+                        <input asp-for="ProductValue" class="form-control" />
+                        <span asp-validation-for="ProductValue" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                     <div class="form-group">
+                        <label class="control-label">Quantidade</label>
+                        <input asp-for="Quantity" class="form-control" />
+                        <span asp-validation-for="Quantity" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+             <div class="row">               
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Imagem</label>
+                        <input asp-for="Image" class="form-control" type="file" id="formFile">
+                        <span asp-validation-for="Image" class="text-danger"></span>
+                    </div>
+                </div>                
+            </div>
+            <div class="row">               
+                 <div class="col-md-4">
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" asp-for="Active" /> @Html.DisplayNameFor(model => model.Active)
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="row">               
+                 <div class="col-md-4">
+                     <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-primary" />
+                        <a class="btn btn-info" asp-action="Index">Voltar</a>
+                    </div>
+                </div>
+            </div>            
+        </form>
+    </div>
+</div>
