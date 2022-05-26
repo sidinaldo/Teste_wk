@@ -1,0 +1,40 @@
+﻿@model WK.Tech.Domain.Dtos.CategoryDto
+
+@{
+    ViewData["Title"] = "Atualizar categoria";
+}
+
+<h1>Editar Categoria</h1>
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="UpdateCategory">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Id" />
+
+            <div class="row">
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Código</label>
+                        <input asp-for="Code" class="form-control" />
+                        <span asp-validation-for="Code" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label class="control-label">Nome</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>                   
+                </div>               
+            </div>           
+            <br>
+            <div class="form-group">
+                <input type="submit" value="Atualizar" class="btn btn-primary" />
+                <a class="btn btn-info" asp-action="Categories">Voltar</a>
+            </div>
+        </form>
+    </div>
+</div>
+

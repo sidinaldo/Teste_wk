@@ -28,11 +28,11 @@ namespace WK.Tech.MVC.Controllers
 
         [Route("novo-produto")]
         [HttpPost]
-        public async Task<IActionResult> NewProduct(ProductDto produtoViewModel)
+        public async Task<IActionResult> NewProduct(ProductDto dto)
         {
-            if (!ModelState.IsValid) return View(await PopularCategories(produtoViewModel));
+            if (!ModelState.IsValid) return View(await PopularCategories(dto));
 
-            await _produtctService.Add(produtoViewModel);
+            await _produtctService.Add(dto);
 
             return RedirectToAction("Index");
         }
@@ -46,18 +46,89 @@ namespace WK.Tech.MVC.Controllers
 
         [HttpPost]
         [Route("editar-produto")]
-        public async Task<IActionResult> UpdateProduct(Guid id, ProductDto produtoViewModel)
+        public async Task<IActionResult> UpdateProduct(Guid id, ProductDto dto)
         {
             var produto = await _produtctService.GetById(id);
-            produtoViewModel.Quantity = produto.Quantity;
+            dto.Quantity = produto.Quantity;
 
             ModelState.Remove("QuantidadeEstoque");
-            if (!ModelState.IsValid) return View(await PopularCategories(produtoViewModel));
+            if (!ModelState.IsValid) return View(await PopularCategories(dto));
 
-            await _produtctService.Update(produtoViewModel);
+            await _produtctService.Update(dto);
 
             return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        [Route("admin-categoria")]
+        public async Task<IActionResult> Categories()
+        {
+            return View(await _produtctService.GetAllCategories());
+        }
+
+        [Route("nova-categoria")]
+        public IActionResult NewCategory()
+        {
+            return View(new CategoryDto());
+        }
+
+        [Route("nova-categoria")]
+        [HttpPost]
+        public async Task<IActionResult> NewCategory(CategoryDto dto)
+        {
+            if (!ModelState.IsValid) return View(dto);
+
+            await _produtctService.AddCategory(dto);
+
+            return RedirectToAction("Categories");
+        }
+
+
+        [HttpGet]
+        [Route("editar-categoria")]
+        public async Task<IActionResult> UpdateCategory(Guid id)
+        {
+            var categories = await _produtctService.GetByIdCategories(id);
+            return View(categories);
+        }
+
+        [HttpPost]
+        [Route("editar-categoria")]
+        public async Task<IActionResult> UpdateCategory(Guid id, CategoryDto dto)
+        {
+            if (!ModelState.IsValid) return View(dto);
+
+            var category = await _produtctService.GetByIdCategories(id);
+
+           if(category is null) return View(dto);   
+
+            await _produtctService.UpdateCategory(dto);
+
+            return RedirectToAction("Categories");
+        }
+
+        [HttpGet]
+        [Route("remover-categoria")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            var categories = await _produtctService.GetByIdCategories(id);
+            return View(categories);
+        }
+
+        [HttpPost]
+        [Route("remover-categoria")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteCategory(Guid id)
+        {
+            var category = await _produtctService.GetByIdCategories(id);
+
+            if (category is null) return RedirectToAction("Categories");
+
+            await _produtctService.DeleteCategory(id);
+
+            return RedirectToAction("Categories");
+        }
+
 
         [HttpGet]
         [Route("produtos-atualizar-estoque")]

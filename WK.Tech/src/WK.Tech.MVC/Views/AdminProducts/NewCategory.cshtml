@@ -1,0 +1,42 @@
+﻿@model  WK.Tech.Domain.Dtos.CategoryDto
+
+@{
+    ViewData["Title"] = "NewCategory";
+}
+
+<h1>Nova categoria</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-12">
+        <form asp-action="NewCategory">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="row">
+                 <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Código</label>
+                        <input asp-for="Code" class="form-control" />
+                        <span asp-validation-for="Code" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label class="control-label">Nome</label>
+                        <input asp-for="Name" class="form-control" />
+                        <span asp-validation-for="Name" class="text-danger"></span>
+                    </div>                   
+                </div>               
+            </div>            
+            <br>
+            <div class="row">               
+                 <div class="col-md-4">
+                     <div class="form-group">
+                        <input type="submit" value="Salvar" class="btn btn-primary" />
+                        <a class="btn btn-info" asp-action="Categories">Voltar</a>
+                    </div>
+                </div>
+            </div>            
+        </form>
+    </div>
+</div>

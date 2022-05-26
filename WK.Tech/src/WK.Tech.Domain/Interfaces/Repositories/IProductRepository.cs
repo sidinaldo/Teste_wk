@@ -9,9 +9,11 @@ namespace WK.Tech.Domain.Interfaces.Repositories
         Task<Product> GetById(Guid id);
         Task<IEnumerable<Product>> GetByCategory(int code);
         Task<IEnumerable<Category>> GetAllCategories();
+        Task<Category> GetByIdCategories(Guid id);
         void Add(Product product);
         void Update(Product product);
         void AddCategory(Category category);
         void UpdateCategory(Category category);
+        void DeleteCategory(Category category);
     }
 }

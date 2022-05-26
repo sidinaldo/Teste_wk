@@ -28,7 +28,7 @@ namespace WK.Tech.Domain.Entities
         public void Validate()
         {
             AssertionConcern.AssertArgumentNotEmpty(Name, "O campo Nome da categoria não pode estar vazio");
-            AssertionConcern.AssertArgumentEquals(Code, 0, "O campo Código não pode ser 0");
+            AssertionConcern.AssertArgumentNotEquals(Code, 0, "O campo Código não pode ser 0");
         }
     }
 }

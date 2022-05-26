@@ -8,10 +8,12 @@ namespace WK.Tech.Domain.Interfaces.Services
         Task<ProductDto> GetById(Guid id);
         Task<IEnumerable<ProductDto>> GetByCategory(int code);
         Task<IEnumerable<CategoryDto>> GetAllCategories();
+        Task<CategoryDto> GetByIdCategories(Guid id);       
         Task Add(ProductDto product);
         Task Update(ProductDto product);
         Task AddCategory(CategoryDto category);
         Task UpdateCategory(CategoryDto category);
+        Task DeleteCategory(Guid id);
         Task<ProductDto> DebitStock(Guid id, int quantity);
         Task<ProductDto> ReporStock(Guid id, int quantity);
     }

@@ -32,6 +32,11 @@ namespace WK.Tech.Domain.Services
             return _mapper.Map<IEnumerable<ProductDto>>(await _productRepository.GetByCategory(code));
         }
 
+        public async Task<CategoryDto> GetByIdCategories(Guid id)
+        {
+            return _mapper.Map<CategoryDto>(await _productRepository.GetByIdCategories(id));
+        }
+
         public async Task<ProductDto> GetById(Guid id)
         {
             return _mapper.Map<ProductDto>(await _productRepository.GetById(id));
@@ -98,6 +103,15 @@ namespace WK.Tech.Domain.Services
             await _productRepository.UnitOfWork.Commit();
 
             return _mapper.Map<ProductDto>(await _productRepository.GetById(id));
+        }
+
+        public async Task DeleteCategory(Guid id)
+        {
+            var category = await _productRepository.GetByIdCategories(id);
+
+            _productRepository.DeleteCategory(category);
+
+            await _productRepository.UnitOfWork.Commit();
         }
     }
 }

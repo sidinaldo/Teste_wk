@@ -35,6 +35,11 @@ namespace WK.Tech.Data.Repository
             return await _context.Categories.AsNoTracking().ToListAsync();
         }
 
+        public async Task<Category> GetByIdCategories(Guid id)
+        {
+            return await _context.Categories.AsNoTracking().FirstOrDefaultAsync(p => p.Id == id);
+        }
+
         public void Add(Product product)
         {
             _context.Products.Add(product);
@@ -55,9 +60,16 @@ namespace WK.Tech.Data.Repository
             _context.Categories.Update(category);
         }
 
+        public void DeleteCategory(Category category)
+        {
+           _context.Categories.Remove(category);
+        }
+
         public void Dispose()
         {
             _context?.Dispose();
         }
+
+       
     }
 }
