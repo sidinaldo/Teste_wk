@@ -27,9 +27,12 @@ Para saber mais sobre como configurar seu ambiente, visite o Guia de download do
 - Entity Framework Core 6.0
 - .NET Core Native DI
 - AutoMapper
+- MySql
 
 ## Arquitetura:
 - Arquitetura completa com questões de separação de responsabilidades, SÓLIDO e Código Limpo
 - Design Orientado por Domínio (Camadas e Padrão de Modelo de Domínio)
 - Unit of Work
 - Repositório
+
+## A pasta "db_wk" contém os scritps de banco de dados
